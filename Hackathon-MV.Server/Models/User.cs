@@ -1,13 +1,14 @@
 ﻿using System.Security.Cryptography;
 
-namespace Hackathon_MV.Server
+namespace Hackathon_MV.Server.Models
 {
     public class User
     {
-        private string FirstName { get; set; }
-        private string LastName { get; set; }
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
-        private string Password { get; set; }
+        public string Password { get; set; }
 
         public string? Email { get; set; }
 
