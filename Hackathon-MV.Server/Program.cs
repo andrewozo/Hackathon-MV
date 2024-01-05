@@ -2,6 +2,7 @@ global using Microsoft.EntityFrameworkCore;
 global using Hackathon_MV.Server.Models;
 global using Hackathon_MV.Server.DTOS.User;
 global using Hackathon_MV.Server.DTOS.Account;
+global using Hackathon_MV.Server.DTOS.Transaction;
 global using Hackathon_MV.Server.Services.Users;
 global using Microsoft.EntityFrameworkCore;
 using Hackathon_MV.Server.Data;

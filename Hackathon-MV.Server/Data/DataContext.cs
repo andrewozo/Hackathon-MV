@@ -12,5 +12,7 @@ namespace Hackathon_MV.Server.Data
         public DbSet<User> Users => Set<User>();
 
         public DbSet<Account> Accounts => Set<Account>();
+
+        public DbSet<Transaction> Transactions => Set<Transaction>();
     }
 }
