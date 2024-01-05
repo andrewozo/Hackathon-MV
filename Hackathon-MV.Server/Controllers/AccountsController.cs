@@ -16,28 +16,28 @@ namespace Hackathon_MV.Server.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<ServiceResponse<GetAccountDTO>>> GetAllAccounts()
+        public async Task<ActionResult<ServiceResponse<GetAccountDto>>> GetAllAccounts()
         {
             return Ok(await _accountsService.GetAllAccounts());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ServiceResponse<GetAccountDTO>>> GetSingleAccount(int id)
+        public async Task<ActionResult<ServiceResponse<GetAccountDto>>> GetSingleAccount(int id)
         {
             return Ok(await _accountsService.GetAccountById(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<List<GetUserDTO>>>> AddUser(
-            AddAccountDTO newAccount
+        public async Task<ActionResult<ServiceResponse<List<GetUserDto>>>> AddUser(
+            AddAccountDto newAccount
         )
         {
             return Ok(await _accountsService.AddAccount(newAccount));
         }
 
         [HttpPut]
-        public async Task<ActionResult<ServiceResponse<List<GetAccountDTO>>>> UpdateAccount(
-            UpdateAccountDTO updateAccount
+        public async Task<ActionResult<ServiceResponse<List<GetAccountDto>>>> UpdateAccount(
+            UpdateAccountDto updateAccount
         )
         {
             var response = await _accountsService.UpdateAccount(updateAccount);
@@ -51,7 +51,7 @@ namespace Hackathon_MV.Server.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ServiceResponse<GetAccountDTO>>> DeleteAccount(int id)
+        public async Task<ActionResult<ServiceResponse<GetAccountDto>>> DeleteAccount(int id)
         {
             var response = await _accountsService.DeleteAccount(id);
             if (response.Data == null)

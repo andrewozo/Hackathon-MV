@@ -15,28 +15,28 @@ namespace Hackathon_MV.Server.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<ServiceResponse<GetUserDTO>>> GetAllUsers()
+        public async Task<ActionResult<ServiceResponse<GetUserDto>>> GetAllUsers()
         {
             return Ok(await _userService.GetAllUsers());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ServiceResponse<GetUserDTO>>> GetSingleUser(int id)
+        public async Task<ActionResult<ServiceResponse<GetUserDto>>> GetSingleUser(int id)
         {
             return Ok(await _userService.GetUserById(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<List<GetUserDTO>>>> AddUser(
-            AddUserDTO newUser
+        public async Task<ActionResult<ServiceResponse<List<GetUserDto>>>> AddUser(
+            AddUserDto newUser
         )
         {
             return Ok(await _userService.AddUser(newUser));
         }
 
         [HttpPut]
-        public async Task<ActionResult<ServiceResponse<List<GetUserDTO>>>> UpdateUser(
-            UpdateUserDTO updateCharacter
+        public async Task<ActionResult<ServiceResponse<List<GetUserDto>>>> UpdateUser(
+            UpdateUserDto updateCharacter
         )
         {
             var response = await _userService.UpdateUser(updateCharacter);
@@ -50,7 +50,7 @@ namespace Hackathon_MV.Server.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ServiceResponse<GetUserDTO>>> DeleteUser(int id)
+        public async Task<ActionResult<ServiceResponse<GetUserDto>>> DeleteUser(int id)
         {
             var response = await _userService.DeleteUser(id);
             if (response.Data == null)

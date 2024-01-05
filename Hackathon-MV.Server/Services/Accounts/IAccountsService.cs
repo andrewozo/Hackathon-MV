@@ -2,14 +2,14 @@
 
 public interface IAccountsService
 {
-    Task<ServiceResponse<List<GetAccountDTO>>> GetAllAccounts();
+    Task<ServiceResponse<List<GetAccountDto>>> GetAllAccounts();
 
-    Task<ServiceResponse<GetAccountDTO>> GetAccountById(int id);
+    Task<ServiceResponse<GetAccountDto>> GetAccountById(int id);
 
-    Task<ServiceResponse<List<GetAccountDTO>>> AddAccount(AddAccountDTO newAccount);
+    Task<ServiceResponse<List<GetAccountDto>>> AddAccount(AddAccountDto newAccount);
 
-    Task<ServiceResponse<GetAccountDTO>> UpdateAccount(UpdateAccountDTO updateAccount);
+    Task<ServiceResponse<GetAccountDto>> UpdateAccount(UpdateAccountDto updateAccount);
 
-    Task<ServiceResponse<List<GetAccountDTO>>> DeleteAccount(int id);
+    Task<ServiceResponse<List<GetAccountDto>>> DeleteAccount(int id);
 
 }

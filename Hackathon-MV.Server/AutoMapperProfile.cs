@@ -6,9 +6,9 @@ namespace Hackathon_MV.Server
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, GetUserDTO>();
+            CreateMap<User, GetUserDto>();
 
-            CreateMap<AddUserDTO, User>();
+            CreateMap<AddUserDto, User>();
         }
         
     }

@@ -2,14 +2,14 @@
 {
     public interface IUserService
     {
-        Task<ServiceResponse<List<GetUserDTO>>> GetAllUsers();
+        Task<ServiceResponse<List<GetUserDto>>> GetAllUsers();
 
-        Task<ServiceResponse<GetUserDTO>> GetUserById(int id);
+        Task<ServiceResponse<GetUserDto>> GetUserById(int id);
 
-        Task<ServiceResponse<List<GetUserDTO>>> AddUser(AddUserDTO newUser);
+        Task<ServiceResponse<List<GetUserDto>>> AddUser(AddUserDto newUser);
 
-        Task<ServiceResponse<GetUserDTO>> UpdateUser(UpdateUserDTO updateUser);
+        Task<ServiceResponse<GetUserDto>> UpdateUser(UpdateUserDto updateUser);
 
-        Task<ServiceResponse<List<GetUserDTO>>> DeleteUser(int id);
+        Task<ServiceResponse<List<GetUserDto>>> DeleteUser(int id);
     }
 }

@@ -15,24 +15,24 @@ namespace Hackathon_MV.Server.Services.Users
             _mapper = mapper;
         }
 
-        public async Task<ServiceResponse<List<GetUserDTO>>> AddUser(
-            AddUserDTO newUser
+        public async Task<ServiceResponse<List<GetUserDto>>> AddUser(
+            AddUserDto newUser
         )
         {
-            var serviceResponse = new ServiceResponse<List<GetUserDTO>>();
+            var serviceResponse = new ServiceResponse<List<GetUserDto>>();
             var user = _mapper.Map<User>(newUser);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             serviceResponse.Data = await _context
                 .Users
-                .Select(c => _mapper.Map<GetUserDTO>(c))
+                .Select(c => _mapper.Map<GetUserDto>(c))
                 .ToListAsync();
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetUserDTO>>> DeleteUser(int id)
+        public async Task<ServiceResponse<List<GetUserDto>>> DeleteUser(int id)
         {
-            var serviceResponse = new ServiceResponse<List<GetUserDTO>>();
+            var serviceResponse = new ServiceResponse<List<GetUserDto>>();
             try
             {
                 var user = await _context.Users.FirstOrDefaultAsync(c => c.Id == id);
@@ -47,7 +47,7 @@ namespace Hackathon_MV.Server.Services.Users
 
                 serviceResponse.Data = await _context
                     .Users
-                    .Select(c => _mapper.Map<GetUserDTO>(c))
+                    .Select(c => _mapper.Map<GetUserDto>(c))
                     .ToListAsync();
             }
             catch (Exception ex)
@@ -59,32 +59,32 @@ namespace Hackathon_MV.Server.Services.Users
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetUserDTO>>> GetAllUsers()
+        public async Task<ServiceResponse<List<GetUserDto>>> GetAllUsers()
         {
-            var serviceResponse = new ServiceResponse<List<GetUserDTO>>();
+            var serviceResponse = new ServiceResponse<List<GetUserDto>>();
             var dbUsers = await _context.Users.ToListAsync();
             serviceResponse.Data = dbUsers
-                .Select(c => _mapper.Map<GetUserDTO>(c))
+                .Select(c => _mapper.Map<GetUserDto>(c))
                 .ToList();
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<GetUserDTO>> GetUserById(int id)
+        public async Task<ServiceResponse<GetUserDto>> GetUserById(int id)
         {
-            var serviceResponse = new ServiceResponse<GetUserDTO>();
+            var serviceResponse = new ServiceResponse<GetUserDto>();
 
             var dbUser = await _context.Users.FirstOrDefaultAsync(c => c.Id == id);
 
-            serviceResponse.Data = _mapper.Map<GetUserDTO>(dbUser);
+            serviceResponse.Data = _mapper.Map<GetUserDto>(dbUser);
 
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<GetUserDTO>> UpdateUser(
-            UpdateUserDTO updatedUser
+        public async Task<ServiceResponse<GetUserDto>> UpdateUser(
+            UpdateUserDto updatedUser
         )
         {
-            var serviceResponse = new ServiceResponse<GetUserDTO>();
+            var serviceResponse = new ServiceResponse<GetUserDto>();
             try
             {
                 var user = await _context
@@ -102,7 +102,7 @@ namespace Hackathon_MV.Server.Services.Users
 
                 await _context.SaveChangesAsync();
 
-                serviceResponse.Data = _mapper.Map<GetUserDTO>(user);
+                serviceResponse.Data = _mapper.Map<GetUserDto>(user);
             }
             catch (Exception ex)
             {

@@ -1,4 +1,6 @@
-﻿namespace Hackathon_MV.Server.Models
+﻿using System.Data.SqlTypes;
+
+namespace Hackathon_MV.Server.Models
 {
     public class Account
     {

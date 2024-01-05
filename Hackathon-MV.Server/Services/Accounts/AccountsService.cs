@@ -14,22 +14,22 @@ namespace Hackathon_MV.Server.Services.Accounts
             _mapper = mapper;
             _context = context;
         }
-        public async Task<ServiceResponse<List<GetAccountDTO>>> AddAccount(AddAccountDTO newAccount)
+        public async Task<ServiceResponse<List<GetAccountDto>>> AddAccount(AddAccountDto newAccount)
         {
-            var serviceResponse = new ServiceResponse<List<GetAccountDTO>>();
+            var serviceResponse = new ServiceResponse<List<GetAccountDto>>();
             var account = _mapper.Map<Account>(newAccount);
             _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
             serviceResponse.Data = await _context
                 .Accounts
-                .Select(c => _mapper.Map<GetAccountDTO>(c))
+                .Select(c => _mapper.Map<GetAccountDto>(c))
                 .ToListAsync();
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetAccountDTO>>> DeleteAccount(int id)
+        public async Task<ServiceResponse<List<GetAccountDto>>> DeleteAccount(int id)
         {
-            var serviceResponse = new ServiceResponse<List<GetAccountDTO>>();
+            var serviceResponse = new ServiceResponse<List<GetAccountDto>>();
             try
             {
                 var account = await _context.Accounts.FirstOrDefaultAsync(c => c.Id == id);
@@ -44,7 +44,7 @@ namespace Hackathon_MV.Server.Services.Accounts
 
                 serviceResponse.Data = await _context
                     .Accounts
-                    .Select(c => _mapper.Map<GetAccountDTO>(c))
+                    .Select(c => _mapper.Map<GetAccountDto>(c))
                     .ToListAsync();
             }
             catch (Exception ex)
@@ -56,30 +56,30 @@ namespace Hackathon_MV.Server.Services.Accounts
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<GetAccountDTO>> GetAccountById(int id)
+        public async Task<ServiceResponse<GetAccountDto>> GetAccountById(int id)
         {
-            var serviceResponse = new ServiceResponse<GetAccountDTO>();
+            var serviceResponse = new ServiceResponse<GetAccountDto>();
 
             var dbAccount = await _context.Accounts.FirstOrDefaultAsync(c => c.Id == id);
 
-            serviceResponse.Data = _mapper.Map<GetAccountDTO>(dbAccount);
+            serviceResponse.Data = _mapper.Map<GetAccountDto>(dbAccount);
 
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetAccountDTO>>> GetAllAccounts()
+        public async Task<ServiceResponse<List<GetAccountDto>>> GetAllAccounts()
         {
-            var serviceResponse = new ServiceResponse<List<GetAccountDTO>>();
+            var serviceResponse = new ServiceResponse<List<GetAccountDto>>();
             var dbAccounts = await _context.Users.ToListAsync();
             serviceResponse.Data = dbAccounts
-                .Select(c => _mapper.Map<GetAccountDTO>(c))
+                .Select(c => _mapper.Map<GetAccountDto>(c))
                 .ToList();
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<GetAccountDTO>> UpdateAccount(UpdateAccountDTO updateAccount)
+        public async Task<ServiceResponse<GetAccountDto>> UpdateAccount(UpdateAccountDto updateAccount)
         {
-            var serviceResponse = new ServiceResponse<GetAccountDTO>();
+            var serviceResponse = new ServiceResponse<GetAccountDto>();
             try
             {
                 var account = await _context
@@ -97,7 +97,7 @@ namespace Hackathon_MV.Server.Services.Accounts
 
                 await _context.SaveChangesAsync();
 
-                serviceResponse.Data = _mapper.Map<GetAccountDTO>(account);
+                serviceResponse.Data = _mapper.Map<GetAccountDto>(account);
             }
             catch (Exception ex)
             {

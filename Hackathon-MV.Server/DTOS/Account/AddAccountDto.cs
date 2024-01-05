@@ -1,8 +1,8 @@
 ﻿namespace Hackathon_MV.Server.DTOS.Account
 {
-    public class UpdateAccountDto
+    public class AddAccountDto
     {
-        public int Id { get; set; }
+        
 
         public int AccountNum { get; set; }
 
