@@ -1,6 +1,6 @@
 ﻿namespace Hackathon_MV.Server.DTOS.User
 {
-    public class AddUserDTO
+    public class AddUserDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

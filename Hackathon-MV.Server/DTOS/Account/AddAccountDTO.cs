@@ -1,6 +1,6 @@
 ﻿namespace Hackathon_MV.Server.DTOS.Account
 {
-    public class AddAccountDTO
+    public class AddAccountDto
     {
         
 
