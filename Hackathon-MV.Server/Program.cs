@@ -1,9 +1,11 @@
 global using Microsoft.EntityFrameworkCore;
 global using Hackathon_MV.Server.Models;
 global using Hackathon_MV.Server.DTOS.User;
+global using Hackathon_MV.Server.DTOS.Account;
 global using Hackathon_MV.Server.Services.Users;
 global using Microsoft.EntityFrameworkCore;
 using Hackathon_MV.Server.Data;
+using Hackathon_MV.Server.Services.Accounts;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +22,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAccountsService, AccountsService>();
 
 var app = builder.Build();
 
