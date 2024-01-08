@@ -29,9 +29,27 @@
             return response;
         }
 
-        public Task<ServiceResponse<string>> Login(string email, string password)
+        public  async Task<ServiceResponse<string>> Login(string email, string password)
         {
-            throw new NotImplementedException();
+            var response = new ServiceResponse<string>();
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.ToLower().Equals(email.ToLower()));
+
+            if (user == null)
+            {
+                response.Success = false;
+                response.Message = "User Not Found";
+            }
+            else if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            {
+                response.Success = false;
+                response.Message = "Incorrect Password";
+            }
+            else
+            {
+                response.Data = user.Id.ToString();
+            }
+
+            return response;
         }
 
         public async Task<bool> UserExists(string email)
@@ -50,6 +68,15 @@
             {
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
+        }
+
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            {
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                return computedHash.SequenceEqual(passwordHash);
             }
         }
     }
