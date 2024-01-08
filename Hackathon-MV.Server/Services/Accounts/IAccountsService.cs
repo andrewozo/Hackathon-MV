@@ -2,7 +2,7 @@
 
 public interface IAccountsService
 {
-    Task<ServiceResponse<List<GetAccountDto>>> GetAllAccounts();
+    Task<ServiceResponse<List<GetAccountDto>>> GetAllAccounts(int userId);
 
     Task<ServiceResponse<GetAccountDto>> GetAccountById(int id);
 

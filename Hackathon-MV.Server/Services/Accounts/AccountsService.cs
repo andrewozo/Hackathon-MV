@@ -67,10 +67,10 @@ namespace Hackathon_MV.Server.Services.Accounts
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetAccountDto>>> GetAllAccounts()
+        public async Task<ServiceResponse<List<GetAccountDto>>> GetAllAccounts(int userId)
         {
             var serviceResponse = new ServiceResponse<List<GetAccountDto>>();
-            var dbAccounts = await _context.Accounts.ToListAsync();
+            var dbAccounts = await _context.Accounts.Where(acc => acc.User!.Id == userId).ToListAsync();
             serviceResponse.Data = dbAccounts
                 .Select(c => _mapper.Map<GetAccountDto>(c))
                 .ToList();

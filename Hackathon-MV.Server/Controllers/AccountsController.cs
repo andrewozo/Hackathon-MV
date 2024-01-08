@@ -1,10 +1,13 @@
-﻿using Hackathon_MV.Server.Services.Accounts;
+﻿using System.Security.Claims;
+using Hackathon_MV.Server.Services.Accounts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hackathon_MV.Server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     
@@ -21,7 +24,8 @@ namespace Hackathon_MV.Server.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<GetAccountDto>>> GetAllAccounts()
         {
-            return Ok(await _accountsService.GetAllAccounts());
+            int userId = int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)!.Value);
+            return Ok(await _accountsService.GetAllAccounts(userId));
         }
         
         [HttpGet("{id}")]
