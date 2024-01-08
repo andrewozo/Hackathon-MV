@@ -70,7 +70,7 @@ namespace Hackathon_MV.Server.Services.Accounts
         public async Task<ServiceResponse<List<GetAccountDto>>> GetAllAccounts()
         {
             var serviceResponse = new ServiceResponse<List<GetAccountDto>>();
-            var dbAccounts = await _context.Users.ToListAsync();
+            var dbAccounts = await _context.Accounts.ToListAsync();
             serviceResponse.Data = dbAccounts
                 .Select(c => _mapper.Map<GetAccountDto>(c))
                 .ToList();
