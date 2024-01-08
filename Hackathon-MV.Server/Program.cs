@@ -37,6 +37,7 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAccountsService, AccountsService>();
 builder.Services.AddScoped<ITransactionsService, TransactionsService>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
 var app = builder.Build();
 

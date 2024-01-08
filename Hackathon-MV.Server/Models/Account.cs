@@ -12,6 +12,8 @@ namespace Hackathon_MV.Server.Models
 
         public AccTypeClass Class { get; set; } = AccTypeClass.Checkings;
 
+        public User? User { get; set; }
+
 
     }
 }

@@ -8,17 +8,15 @@ namespace Hackathon_MV.Server.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public string Password { get; set; }
+        public byte[] PasswordHash { get; set; } = new byte[0];
+
+        public byte[] PasswordSalt { get; set; } = new byte[0];
 
         public string? Email { get; set; }
 
-        public User(string firstName, string lastName, string password, string email)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            Password = password;
-            Email = email;
-        }
+        public List<Account>? Accounts { get; set; }
+
+        
 
 
 
