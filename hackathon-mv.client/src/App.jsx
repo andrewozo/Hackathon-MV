@@ -1,49 +1,72 @@
-import { useEffect, useState } from 'react';
-import './App.css';
+import { useEffect, useState } from "react";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  createTheme,
+  ThemeProvider,
+} from "@mui/material/";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Link, Routes, Route } from "react-router-dom";
+import Accounts from "./Components/Account/Accounts";
+import "./App.css";
 
 function App() {
-    const [forecasts, setForecasts] = useState();
+  useEffect(() => {}, []);
 
-    useEffect(() => {
-        populateWeatherData();
-    }, []);
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#066839",
+        darker: "#066839",
+      },
+      secondary: {
+        main: "#fefae0",
+      },
+    },
+  });
 
-    const contents = forecasts === undefined
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
-        : <table className="table table-striped" aria-labelledby="tabelLabel">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Temp. (C)</th>
-                    <th>Temp. (F)</th>
-                    <th>Summary</th>
-                </tr>
-            </thead>
-            <tbody>
-                {forecasts.map(forecast =>
-                    <tr key={forecast.date}>
-                        <td>{forecast.date}</td>
-                        <td>{forecast.temperatureC}</td>
-                        <td>{forecast.temperatureF}</td>
-                        <td>{forecast.summary}</td>
-                    </tr>
-                )}
-            </tbody>
-        </table>;
+  return (
+    <div>
+      <ThemeProvider theme={theme}>
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="static" color="primary">
+            <Toolbar>
+              <IconButton
+                size="large"
+                edge="start"
+                color="secondary"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+              >
+                <MenuIcon />
+              </IconButton>
 
-    return (
-        <div>
-            <h1 id="tabelLabel">Weather forecast</h1>
-            <p>This component demonstrates fetching data from the server.</p>
-            {contents}
-        </div>
-    );
-    
-    async function populateWeatherData() {
-        const response = await fetch('weatherforecast');
-        const data = await response.json();
-        setForecasts(data);
-    }
+              <Typography
+                color="secondary"
+                variant="h6"
+                component="div"
+                sx={{ flexGrow: 1 }}
+                align="center"
+              >
+                <Link to="/">Bank of Drew</Link>
+              </Typography>
+
+              <Button color="secondary">
+                <Link to="/newActivity">Add New</Link>
+              </Button>
+            </Toolbar>
+          </AppBar>
+        </Box>
+      </ThemeProvider>
+      <Routes>
+        <Route path="/" element={<Accounts />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
