@@ -9,5 +9,7 @@ namespace Hackathon_MV.Server.Models
         public string? Name { get; set; }
 
         public decimal Amount { get; set; }
+
+        public Account? Account { get; set; }
     }
 }

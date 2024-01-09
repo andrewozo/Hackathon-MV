@@ -13,12 +13,20 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../store/index";
 
 function NavBar() {
   const isLoggedIn = useSelector((state) => state.auth.me.id);
   const firstName = useSelector((state) => state.auth.me.firstName);
   const lastName = useSelector((state) => state.auth.me.lastName);
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const logoutAndRedirectHome = () => {
+    dispatch(logout());
+    navigate("/");
+  };
 
   const theme = createTheme({
     palette: {
@@ -44,7 +52,7 @@ function NavBar() {
                   variant="h6"
                   component="div"
                   sx={{ flexGrow: 1 }}
-                  align="start"
+                  align="left"
                 >
                   <Link to="/">Bank of Drew</Link>
                 </Typography>
@@ -59,6 +67,23 @@ function NavBar() {
                   <Link to="/">
                     Welcome, {firstName} {lastName}
                   </Link>
+                </Typography>
+
+                <Typography
+                  color="secondary"
+                  variant="h6"
+                  component="div"
+                  sx={{ flexGrow: 1 }}
+                  align="center"
+                >
+                  <Button
+                    type="button"
+                    variant="contained"
+                    sx={{ width: "25%" }}
+                    onClick={logoutAndRedirectHome}
+                  >
+                    Logout
+                  </Button>
                 </Typography>
               </Toolbar>
             </AppBar>

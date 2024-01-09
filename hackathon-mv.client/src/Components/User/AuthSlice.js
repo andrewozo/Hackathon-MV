@@ -38,7 +38,7 @@ export const verifiedUser = createAsyncThunk("auth/me", async () => {
       const { data } = await axios.get(
         `https://localhost:7276/api/Auth/api/me?token=${token}`
       );
-      console.log(data.data);
+      //   console.log(data.data);
       return data.data;
     } else {
       return {};
@@ -57,7 +57,13 @@ const authSlice = createSlice({
     failed: false,
   },
 
-  reducers: {},
+  reducers: {
+    logout(state, action) {
+      window.localStorage.removeItem("token");
+      state.me = {};
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(register.fulfilled, (state, action) => {});
     builder.addCase(verifiedUser.fulfilled, (state, action) => {
@@ -66,5 +72,7 @@ const authSlice = createSlice({
     });
   },
 });
+
+export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;

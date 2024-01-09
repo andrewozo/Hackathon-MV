@@ -18,7 +18,7 @@ namespace Hackathon_MV.Server.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<GetTransactionDto>>> GetAllTransactions()
         {
-            return Ok(await _transactionsService.GetAllTransactions());
+            return Ok(await _transactionsService.GetAllTransactions(1));
         }
 
         [HttpGet("{id}")]

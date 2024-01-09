@@ -35,13 +35,14 @@ function Accounts() {
   const dispatch = useDispatch();
 
   const accounts = useSelector((state) => state.accounts.allAccounts);
-  const isLoggedIn = useSelector((state) => state.auth.me.id);
-
-  console.log(isLoggedIn);
+  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  const userId = useSelector((state) => state.auth.me.id);
+  console.log(userId);
 
   useEffect(() => {
-    dispatch(fetchAllAccounts());
-  }, [dispatch]);
+    dispatch(verifiedUser());
+    dispatch(fetchAllAccounts(userId));
+  }, []);
 
   return (
     <div>

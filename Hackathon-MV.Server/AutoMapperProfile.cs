@@ -13,6 +13,10 @@ namespace Hackathon_MV.Server
             CreateMap<Account, GetAccountDto>();
 
             CreateMap<AddAccountDto, Account>();
+
+            CreateMap<Transaction, GetTransactionDto>();
+
+            CreateMap<AddTransactionDto, Transaction>();
         }
     }
 }

@@ -25,12 +25,11 @@ function AuthForm() {
 
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(register({ firstName, lastName, email, password }));
-    dispatch(signin({ email, password }))
-    navigate('/')
-
+    await dispatch(register({ firstName, lastName, email, password }));
+    await dispatch(signin({ email, password }));
+    await navigate("/");
   };
 
   const theme = createTheme({

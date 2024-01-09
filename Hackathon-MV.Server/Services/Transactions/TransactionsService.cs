@@ -60,12 +60,14 @@ namespace Hackathon_MV.Server.Services.Transactions
 
         }
 
-        public async Task<ServiceResponse<List<GetTransactionDto>>> GetAllTransactions()
+        public async Task<ServiceResponse<List<GetTransactionDto>>> GetAllTransactions(int accId)
         {
             var serviceResponse = new ServiceResponse<List<GetTransactionDto>>();
-            var dbTransactions = await _context.Transactions.ToListAsync();
+
+            var dbTransactions = await _context.Transactions.Where(t => t.Account!.Id == accId).ToListAsync();
+
             serviceResponse.Data = dbTransactions
-                .Select(c => _mapper.Map<GetTransactionDto>(c))
+                .Select(t => _mapper.Map<GetTransactionDto>(t))
                 .ToList();
             return serviceResponse;
         }

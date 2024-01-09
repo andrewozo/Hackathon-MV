@@ -6,10 +6,17 @@ const initialState = { allAccounts: [], singleAccount: {} };
 export const fetchAllAccounts = createAsyncThunk(
   "fetchAllAccounts",
   async () => {
+    const token = window.localStorage.getItem("token");
     try {
-      const { data } = await axios.get(
-        "https://localhost:7276/api/Accounts/GetAll"
+      const response = await axios.get(
+        `https://localhost:7276/api/Auth/api/me?token=${token}`
       );
+      const userId = response.data.data.id;
+      const { data } = await axios.get(
+        `https://localhost:7276/api/Accounts/GetAll?accId=${userId}`
+      );
+      // console.log(response.data.data.id);
+      // console.log(data);
       return data;
     } catch (error) {
       console.log(error);

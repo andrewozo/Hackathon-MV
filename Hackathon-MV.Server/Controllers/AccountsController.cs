@@ -22,10 +22,10 @@ namespace Hackathon_MV.Server.Controllers
 
         [EnableCors("AllowAll")]
         [HttpGet("GetAll")]
-        public async Task<ActionResult<ServiceResponse<GetAccountDto>>> GetAllAccounts()
+        public async Task<ActionResult<ServiceResponse<GetAccountDto>>> GetAllAccounts(int accId)
         {
             //int userId = int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)!.Value);
-            return Ok(await _accountsService.GetAllAccounts(2));
+            return Ok(await _accountsService.GetAllAccounts(accId));
         }
         
         [HttpGet("{id}")]
