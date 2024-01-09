@@ -24,6 +24,23 @@ export const fetchAllAccounts = createAsyncThunk(
   }
 );
 
+export const fetchSingleAccount = createAsyncThunk(
+  "fetchSingleAccount",
+  async (id) => {
+    try {
+      const { data } = await axios.get(
+        `https://localhost:7276/api/Accounts/${id}`
+      );
+
+      console.log(data);
+
+      return data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const accountsSlice = createSlice({
   name: "accounts",
   initialState,
@@ -31,6 +48,9 @@ const accountsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchAllAccounts.fulfilled, (state, action) => {
       state.allAccounts = action.payload;
+    });
+    builder.addCase(fetchSingleAccount.fulfilled, (state, action) => {
+      state.singleAccount = action.payload;
     });
   },
 });

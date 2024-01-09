@@ -1,4 +1,5 @@
 ﻿
+using System.Security.Claims;
 using AutoMapper;
 using Hackathon_MV.Server.Data;
 
@@ -8,12 +9,17 @@ namespace Hackathon_MV.Server.Services.Accounts
     {
         private readonly IMapper _mapper;
         private readonly DataContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AccountsService(IMapper mapper, DataContext context)
+        public AccountsService(IMapper mapper, DataContext context, IHttpContextAccessor httpContextAccessor)
         {
             _mapper = mapper;
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
+
+        private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext!.User
+            .FindFirstValue(ClaimTypes.NameIdentifier)!);
         public async Task<ServiceResponse<List<GetAccountDto>>> AddAccount(AddAccountDto newAccount)
         {
             var serviceResponse = new ServiceResponse<List<GetAccountDto>>();
