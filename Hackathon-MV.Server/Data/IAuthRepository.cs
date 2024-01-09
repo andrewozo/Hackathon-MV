@@ -7,5 +7,7 @@
         Task<ServiceResponse<string>> Login(string email, string password);
 
         Task<bool> UserExists(string email);
+
+        Task<ServiceResponse<GetUserDto>> GetUserByToken(string token);
     }
 }

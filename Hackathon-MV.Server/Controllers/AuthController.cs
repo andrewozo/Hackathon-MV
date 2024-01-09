@@ -1,4 +1,5 @@
 ﻿using Hackathon_MV.Server.Data;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +16,8 @@ namespace Hackathon_MV.Server.Controllers
             _authRepo = authRepo;
         }
 
+
+        [EnableCors("AllowAll")]
         [HttpPost("Register")]
         public async Task<ActionResult<ServiceResponse<int>>> Register(UserRegisterDto request)
         {
@@ -33,7 +36,7 @@ namespace Hackathon_MV.Server.Controllers
 
         }
 
-
+        [EnableCors("AllowAll")]
         [HttpPost("Login")]
         public async Task<ActionResult<ServiceResponse<int>>> Login(UserLoginDto request)
         {
@@ -47,6 +50,20 @@ namespace Hackathon_MV.Server.Controllers
 
             return Ok(response);
 
+        }
+
+        [EnableCors("AllowAll")]
+        [HttpGet("api/me")]
+        public async Task<ActionResult<ServiceResponse<GetUserDto>>> GetUser(string token)
+        {
+            var response = await _authRepo.GetUserByToken(token);
+
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
         }
 
 

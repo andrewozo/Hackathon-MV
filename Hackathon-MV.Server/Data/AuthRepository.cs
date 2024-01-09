@@ -1,5 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
+using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Hackathon_MV.Server.Data
@@ -8,11 +10,16 @@ namespace Hackathon_MV.Server.Data
     {
         private readonly DataContext _context;
         private readonly IConfiguration _configuration;
+        
+        private readonly IMapper _mapper;
 
-        public AuthRepository(DataContext context, IConfiguration configuration)
+        public AuthRepository(DataContext context, IConfiguration configuration, IMapper mapper
+        )
         {
             _context = context;
             _configuration = configuration;
+            
+            _mapper = mapper;
         }
         public async Task<ServiceResponse<int>> Register(User user, string password)
         {
@@ -58,6 +65,55 @@ namespace Hackathon_MV.Server.Data
             return response;
         }
 
+
+        public async Task<ServiceResponse<GetUserDto>> GetUserByToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var appSettingsToken = _configuration.GetSection("AppSettings:Token").Value;
+            var response = new ServiceResponse<GetUserDto>();
+            
+
+            if (appSettingsToken == null)
+            {
+                throw new Exception("AppSettings token is null");
+            }
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettingsToken));
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = key,
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                // You may want to set other parameters based on your requirements
+            };
+
+            try
+            {
+                SecurityToken validatedToken;
+                var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out validatedToken);
+
+                var userId = int.Parse(principal.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+                var dbUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+                response.Data = _mapper.Map<GetUserDto>(dbUser);
+
+
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = "Cant find user";
+
+            }
+
+            return response;
+
+        }
+
+
+
+
         public async Task<bool> UserExists(string email)
         {
             if (await _context.Users.AnyAsync(u => u.Email.ToLower() == email.ToLower()))
@@ -67,6 +123,7 @@ namespace Hackathon_MV.Server.Data
 
             return false;
         }
+
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
@@ -120,5 +177,7 @@ namespace Hackathon_MV.Server.Data
 
             
         }
+
+       
     }
 }

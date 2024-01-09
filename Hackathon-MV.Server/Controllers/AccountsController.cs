@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hackathon_MV.Server.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     
@@ -24,8 +24,8 @@ namespace Hackathon_MV.Server.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<GetAccountDto>>> GetAllAccounts()
         {
-            int userId = int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)!.Value);
-            return Ok(await _accountsService.GetAllAccounts(userId));
+            //int userId = int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)!.Value);
+            return Ok(await _accountsService.GetAllAccounts(2));
         }
         
         [HttpGet("{id}")]

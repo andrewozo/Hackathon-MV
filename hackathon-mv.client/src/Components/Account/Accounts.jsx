@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Typography, Divider, Box, Paper, Stack } from "@mui/material";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import { verifiedUser } from "../User/AuthSlice";
 
 function Accounts() {
   const Item = styled(Paper)(({ theme }) => ({
@@ -34,8 +35,9 @@ function Accounts() {
   const dispatch = useDispatch();
 
   const accounts = useSelector((state) => state.accounts.allAccounts);
+  const isLoggedIn = useSelector((state) => state.auth.me.id);
 
-  console.log(accounts.data);
+  console.log(isLoggedIn);
 
   useEffect(() => {
     dispatch(fetchAllAccounts());
@@ -43,32 +45,36 @@ function Accounts() {
 
   return (
     <div>
-      <div>
-        {accounts.data?.map((account) => (
-          <div key={account.id}>
-            <ThemeProvider theme={theme}>
-              <Link to={`/${account.id}`}>
-                <Box sx={{ width: "100%" }}>
-                  <Stack spacing={4}>
-                    <Paper elevation={6} style={{ margin: "10px" }}>
-                      <Item>
-                        <Typography sx={{ fontWeight: "bold" }}>
-                          {`${account.class}${account.accountNum}`}
-                        </Typography>
+      {isLoggedIn ? (
+        <div>
+          {accounts.data?.map((account) => (
+            <div key={account.id}>
+              <ThemeProvider theme={theme}>
+                <Link to={`/${account.id}`}>
+                  <Box sx={{ width: "100%" }}>
+                    <Stack spacing={4}>
+                      <Paper elevation={6} style={{ margin: "10px" }}>
+                        <Item>
+                          <Typography sx={{ fontWeight: "bold" }}>
+                            {`${account.class}${account.accountNum}`}
+                          </Typography>
 
-                        <Typography sx={{ fontWeight: "bold" }}>
-                          {account.putCardDown}
-                        </Typography>
-                      </Item>
-                      <Divider />
-                    </Paper>
-                  </Stack>
-                </Box>
-              </Link>
-            </ThemeProvider>
-          </div>
-        ))}
-      </div>
+                          <Typography sx={{ fontWeight: "bold" }}>
+                            {account.putCardDown}
+                          </Typography>
+                        </Item>
+                        <Divider />
+                      </Paper>
+                    </Stack>
+                  </Box>
+                </Link>
+              </ThemeProvider>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>you havent opened any accounts</p>
+      )}
     </div>
   );
 }

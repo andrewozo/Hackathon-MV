@@ -1,4 +1,4 @@
-import { useEffect, } from "react";
+import { useEffect } from "react";
 import {
   AppBar,
   Box,
@@ -13,6 +13,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Link, Routes, Route } from "react-router-dom";
 import Accounts from "./Components/Account/Accounts";
 import "./App.css";
+import AuthForm from "./Components/User/AuthForm";
+import LoginAuthForm from "./Components/User/LoginAuthForm";
+import NavBar from "./navbar/NavBar";
+import AppRoutes from "./AppRoutes";
 
 function App() {
   useEffect(() => {}, []);
@@ -31,40 +35,8 @@ function App() {
 
   return (
     <div>
-      <ThemeProvider theme={theme}>
-        <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static" color="primary">
-            <Toolbar>
-              <IconButton
-                size="large"
-                edge="start"
-                color="secondary"
-                aria-label="menu"
-                sx={{ mr: 2 }}
-              >
-                <MenuIcon />
-              </IconButton>
-
-              <Typography
-                color="secondary"
-                variant="h6"
-                component="div"
-                sx={{ flexGrow: 1 }}
-                align="center"
-              >
-                <Link to="/">Bank of Drew</Link>
-              </Typography>
-
-              <Button color="secondary">
-                <Link to="/newActivity">Add New</Link>
-              </Button>
-            </Toolbar>
-          </AppBar>
-        </Box>
-      </ThemeProvider>
-      <Routes>
-        <Route path="/" element={<Accounts />} />
-      </Routes>
+      <NavBar />
+      <AppRoutes />
     </div>
   );
 }
