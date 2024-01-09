@@ -39,22 +39,12 @@ function NavBar() {
           <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" color="primary">
               <Toolbar>
-                <IconButton
-                  size="large"
-                  edge="start"
-                  color="secondary"
-                  aria-label="menu"
-                  sx={{ mr: 2 }}
-                >
-                  <MenuIcon />
-                </IconButton>
-
                 <Typography
                   color="secondary"
                   variant="h6"
                   component="div"
                   sx={{ flexGrow: 1 }}
-                  align="center"
+                  align="start"
                 >
                   <Link to="/">Bank of Drew</Link>
                 </Typography>
