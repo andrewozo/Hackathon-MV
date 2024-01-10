@@ -1,10 +1,23 @@
 import { useEffect } from "react";
 import { fetchAllAccounts } from "./accountSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Divider, Box, Paper, Stack } from "@mui/material";
+import { Container, CssBaseline } from "@material-ui/core";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import { Link } from "react-router-dom";
 import { verifiedUser } from "../User/AuthSlice";
+
+const useStyles = makeStyles((theme) => ({
+  content: {
+    marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(2),
+    // backgroundColor: "#e8e7e3",
+    padding: theme.spacing(3),
+    borderRadius: theme.spacing(2),
+  },
+}));
 
 function Accounts() {
   const Item = styled(Paper)(({ theme }) => ({
@@ -14,6 +27,8 @@ function Accounts() {
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
+
+  const classes = useStyles();
 
   const theme = createTheme({
     typography: {
@@ -42,7 +57,7 @@ function Accounts() {
   useEffect(() => {
     dispatch(verifiedUser());
     dispatch(fetchAllAccounts(userId));
-  }, []);
+  }, [dispatch, userId]);
 
   return (
     <div>
@@ -90,7 +105,23 @@ function Accounts() {
           ))}
         </div>
       ) : (
-        <p>you havent opened any accounts</p>
+        <div>
+          <CssBaseline />
+          <Container component="main" className={classes.content}>
+            <AccountBalanceIcon fontSize="large" />
+            <Typography variant="h2" component="h1" align="center" gutterBottom>
+              Welcome to the Bank of Drew
+            </Typography>
+            <Typography variant="h3" align="center" paragraph>
+              Hey there, future billionaire! 🚀 Welcome to the Bank of Drew,
+              where we take banking as seriously as we take our morning coffee.
+              Forget about the snooze-fest of traditional banks; with us, it's
+              all about laughter, financial adventures, and making your money
+              feel loved. Buckle up for a rollercoaster of financial fun – where
+              banking meets a stand-up comedy show! 😄💸
+            </Typography>
+          </Container>
+        </div>
       )}
     </div>
   );

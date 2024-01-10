@@ -65,10 +65,12 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(register.fulfilled, (state, action) => {});
     builder.addCase(verifiedUser.fulfilled, (state, action) => {
       state.me = action.payload;
       state.loading = false;
+    });
+    builder.addCase(verifiedUser.pending, (state, action) => {
+      state.loading = true;
     });
   },
 });

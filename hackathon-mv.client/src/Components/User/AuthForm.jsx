@@ -27,9 +27,8 @@ function AuthForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await dispatch(register({ firstName, lastName, email, password }));
-    await dispatch(signin({ email, password }));
-    await navigate("/");
+    dispatch(register({ firstName, lastName, email, password }));
+    navigate("/login");
   };
 
   const theme = createTheme({

@@ -23,8 +23,7 @@ function AppRoutes() {
       {isLoggedIn ? (
         <Routes>
           <Route path="/" element={<Accounts />} />
-          <Route path="/signup" element={<AuthForm />} />
-          <Route path="/login" element={<LoginAuthForm />} />
+
           <Route path="/accounts/:id" element={<SingleAccount />} />
           <Route path="/openAccount" element={<AddAccount />} />
         </Routes>

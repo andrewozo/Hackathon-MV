@@ -21,7 +21,7 @@ function LoginAuthForm() {
 
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     dispatch(signin({ email, password }));
     navigate("/");
@@ -111,6 +111,7 @@ function LoginAuthForm() {
                         id="outline-required"
                         label="Password"
                         value={password}
+                        type="password"
                         onChange={(event) => setPassword(event.target.value)}
                         sx={{ width: "40%" }}
                       />

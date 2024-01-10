@@ -77,6 +77,9 @@ const accountsSlice = createSlice({
     builder.addCase(fetchSingleAccount.fulfilled, (state, action) => {
       state.singleAccount = action.payload;
     });
+    builder.addCase(addAccount.fulfilled, (state, action) => {
+      state.allAccounts.push(action.payload);
+    });
   },
 });
 
