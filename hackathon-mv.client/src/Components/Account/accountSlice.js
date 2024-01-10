@@ -13,7 +13,7 @@ export const fetchAllAccounts = createAsyncThunk(
       );
       const userId = response.data.data.id;
       const { data } = await axios.get(
-        `https://localhost:7276/api/Accounts/GetAll?accId=${userId}`
+        `https://localhost:7276/api/Accounts/GetAll?userId=${userId}`
       );
       // console.log(response.data.data.id);
       // console.log(data);
@@ -35,6 +35,31 @@ export const fetchSingleAccount = createAsyncThunk(
       console.log(data);
 
       return data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const addAccount = createAsyncThunk(
+  "createAccount",
+  async ({ accNum, balance, account }) => {
+    const token = window.localStorage.getItem("token");
+    try {
+      const response = await axios.get(
+        `https://localhost:7276/api/Auth/api/me?token=${token}`
+      );
+      const userId = response.data.data.id;
+      const { data } = await axios.post(
+        `https://localhost:7276/api/Accounts?userId=${userId}`,
+        {
+          accountNum: accNum,
+          balance: balance,
+          class: account,
+        }
+      );
+
+      return data;
     } catch (error) {
       console.log(error);
     }

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   AppBar,
   Box,
@@ -31,11 +30,11 @@ function NavBar() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#066839",
+        main: "#5b49ad",
         darker: "#066839",
       },
       secondary: {
-        main: "#fefae0",
+        main: "#8291f5",
       },
     },
   });
@@ -58,25 +57,37 @@ function NavBar() {
                 </Typography>
 
                 <Typography
-                  color="secondary"
+                  color="primary"
                   variant="h6"
                   component="div"
                   sx={{ flexGrow: 1 }}
                   align="right"
                 >
                   <Link to="/">
-                    Welcome, {firstName} {lastName}
+                    Welcome, {"  "}
+                    {firstName} {lastName}
                   </Link>
                 </Typography>
 
                 <Typography
-                  color="secondary"
+                  color="primary"
+                  variant="h6"
+                  component="div"
+                  sx={{ flexGrow: 1 }}
+                  align="right"
+                >
+                  <Link to="/openAccount">Open Account</Link>
+                </Typography>
+
+                <Typography
+                  color="primary"
                   variant="h6"
                   component="div"
                   sx={{ flexGrow: 1 }}
                   align="right"
                 >
                   <Button
+                    color="secondary"
                     type="button"
                     variant="contained"
                     sx={{ width: "25%" }}
@@ -105,11 +116,11 @@ function NavBar() {
                 </IconButton>
 
                 <Typography
-                  color="secondary"
+                  color="primary"
                   variant="h6"
                   component="div"
                   sx={{ flexGrow: 1 }}
-                  align="center"
+                  align="left"
                 >
                   <Link to="/">Bank of Drew</Link>
                 </Typography>
@@ -118,7 +129,7 @@ function NavBar() {
                   <Link to="/signup">Register</Link>
                 </Button>
 
-                <Button color="secondary">
+                <Button color="primary">
                   <Link to="/login">Login</Link>
                 </Button>
               </Toolbar>

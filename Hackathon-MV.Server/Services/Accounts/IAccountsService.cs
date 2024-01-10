@@ -6,7 +6,7 @@ public interface IAccountsService
 
     Task<ServiceResponse<GetAccountDto>> GetAccountById(int id);
 
-    Task<ServiceResponse<List<GetAccountDto>>> AddAccount(AddAccountDto newAccount);
+    Task<ServiceResponse<List<GetAccountDto>>> AddAccount(AddAccountDto newAccount, int userId);
 
     Task<ServiceResponse<GetAccountDto>> UpdateAccount(UpdateAccountDto updateAccount);
 

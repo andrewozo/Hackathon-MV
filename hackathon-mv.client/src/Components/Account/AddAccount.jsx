@@ -9,27 +9,34 @@ import {
   createTheme,
   ThemeProvider,
 } from "@mui/material";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { register, signin } from "../User/AuthSlice";
+import { addAccount } from "../Account/accountSlice";
 
-function AuthForm() {
+function generateRandomNum() {
+  const randomNumber = Math.floor(Math.random() * 900000000) + 100000000;
+  return randomNumber;
+}
+
+function AddAccount() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [firstName, setFirstName] = useState("");
-
-  const [lastName, setLastName] = useState("");
-
-  const [email, setEmail] = useState("");
-
-  const [password, setPassword] = useState("");
+  const [balance, setBalance] = useState("0");
+  const [account, setAccount] = useState("");
+  let accNum = generateRandomNum();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await dispatch(register({ firstName, lastName, email, password }));
-    await dispatch(signin({ email, password }));
-    await navigate("/");
+    dispatch(addAccount({ accNum, balance, account }));
+    navigate("/");
+  };
+
+  const handleChange = (event) => {
+    setAccount(event.target.value);
   };
 
   const theme = createTheme({
@@ -58,7 +65,7 @@ function AuthForm() {
               component="div"
               variant="h4"
             >
-              Sign Up:
+              Enter Information:
             </Typography>
             <form
               style={{
@@ -66,6 +73,7 @@ function AuthForm() {
                 textAlign: "center",
                 flexDirection: "column",
                 width: "100%",
+                height: "100%",
               }}
               onSubmit={handleSubmit}
             >
@@ -99,53 +107,28 @@ function AuthForm() {
                     <TextField
                       required
                       id="outlined-required"
-                      label="First Name"
-                      value={firstName}
-                      onChange={(event) => setFirstName(event.target.value)}
+                      label="Initial Balance"
+                      value={balance}
+                      onChange={(event) => setBalance(event.target.value)}
                       sx={{ width: "40%" }}
                     />
                   </Paper>
 
                   <Paper
                     elevation={0}
-                    sx={{ width: "100%", paddingTop: "15px" }}
+                    sx={{ width: "100%", paddingTop: "55px" }}
                   >
-                    <TextField
-                      required
-                      id="outline-required"
-                      label="Last Name"
-                      value={lastName}
-                      onChange={(event) => setLastName(event.target.value)}
+                    <Select
                       sx={{ width: "40%" }}
-                    />
-                  </Paper>
-
-                  <Paper
-                    elevation={0}
-                    sx={{ width: "100%", paddingTop: "15px" }}
-                  >
-                    <TextField
-                      required
                       id="outline-required"
-                      label="Email"
-                      value={email}
-                      onChange={(event) => setEmail(event.target.value)}
-                      sx={{ width: "40%" }}
-                    />
-                  </Paper>
-
-                  <Paper
-                    elevation={0}
-                    sx={{ width: "100%", paddingTop: "15px" }}
-                  >
-                    <TextField
-                      required
-                      id="outline-required"
-                      label="Password"
-                      value={password}
-                      onChange={(event) => setPassword(event.target.value)}
-                      sx={{ width: "40%" }}
-                    />
+                      label="Type of Account"
+                      value={account}
+                      onChange={handleChange}
+                    >
+                      <InputLabel sx={{ width: "40%" }}>Acc</InputLabel>
+                      <MenuItem value={"Checkings"}>Checkings</MenuItem>
+                      <MenuItem value={"Savings"}>Savings</MenuItem>
+                    </Select>
                   </Paper>
                 </FormControl>
               </Stack>
@@ -163,4 +146,4 @@ function AuthForm() {
   );
 }
 
-export default AuthForm;
+export default AddAccount;

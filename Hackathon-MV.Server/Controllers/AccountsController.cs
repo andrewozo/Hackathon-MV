@@ -22,10 +22,10 @@ namespace Hackathon_MV.Server.Controllers
 
         [EnableCors("AllowAll")]
         [HttpGet("GetAll")]
-        public async Task<ActionResult<ServiceResponse<GetAccountDto>>> GetAllAccounts(int accId)
+        public async Task<ActionResult<ServiceResponse<GetAccountDto>>> GetAllAccounts(int userId)
         {
             //int userId = int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)!.Value);
-            return Ok(await _accountsService.GetAllAccounts(accId));
+            return Ok(await _accountsService.GetAllAccounts(userId));
         }
         [EnableCors("AllowAll")]
         [HttpGet("{id}")]
@@ -34,13 +34,13 @@ namespace Hackathon_MV.Server.Controllers
             return Ok(await _accountsService.GetAccountById(id));
         }
 
-        
+        [EnableCors("AllowAll")]
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<List<GetUserDto>>>> AddUser(
-            AddAccountDto newAccount
+            AddAccountDto newAccount, int userId
         )
         {
-            return Ok(await _accountsService.AddAccount(newAccount));
+            return Ok(await _accountsService.AddAccount(newAccount, userId));
         }
 
         

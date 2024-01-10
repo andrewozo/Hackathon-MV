@@ -18,12 +18,12 @@ namespace Hackathon_MV.Server.Services.Accounts
             _httpContextAccessor = httpContextAccessor;
         }
 
-        private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext!.User
-            .FindFirstValue(ClaimTypes.NameIdentifier)!);
-        public async Task<ServiceResponse<List<GetAccountDto>>> AddAccount(AddAccountDto newAccount)
+        
+        public async Task<ServiceResponse<List<GetAccountDto>>> AddAccount(AddAccountDto newAccount, int userId)
         {
             var serviceResponse = new ServiceResponse<List<GetAccountDto>>();
             var account = _mapper.Map<Account>(newAccount);
+            account.User = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
             _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
             serviceResponse.Data = await _context

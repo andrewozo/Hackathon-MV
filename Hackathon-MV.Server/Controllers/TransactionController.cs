@@ -1,4 +1,5 @@
 ﻿using Hackathon_MV.Server.Services.Transactions;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,11 +15,11 @@ namespace Hackathon_MV.Server.Controllers
         {
             _transactionsService = transactionsService;
         }
-
+        [EnableCors("AllowAll")]
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<GetTransactionDto>>> GetAllTransactions(int accId)
         {
-            return Ok(await _transactionsService.GetAllTransactions());
+            return Ok(await _transactionsService.GetAllTransactions(accId));
         }
 
         [HttpGet("{id}")]

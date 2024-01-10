@@ -1,22 +1,14 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { fetchAllAccounts } from "./accountSlice";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Typography,
-  Divider,
-  Box,
-  Paper,
-  Stack,
-  Card,
-  Grid,
-} from "@mui/material";
+import { Typography, Divider, Box, Paper, Stack } from "@mui/material";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { verifiedUser } from "../User/AuthSlice";
 
 function Accounts() {
   const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#f0efeb",
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#e8e7e3",
     ...theme.typography.body2,
     padding: theme.spacing(2),
     textAlign: "center",
@@ -65,6 +57,7 @@ function Accounts() {
                       <Paper style={{ margin: "10px" }}>
                         <Item>
                           <Typography
+                            color="#426375"
                             sx={{ fontWeight: "bold" }}
                             align="left"
                             variant="h4"
