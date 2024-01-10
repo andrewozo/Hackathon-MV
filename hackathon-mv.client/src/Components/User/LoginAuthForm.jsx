@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   TextField,
   Stack,
@@ -23,8 +23,9 @@ function LoginAuthForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(signin({ email, password }));
-    navigate("/");
+    await dispatch(signin({ email, password }));
+    await navigate("/");
+    await window.location.reload();
   };
 
   const theme = createTheme({
@@ -94,7 +95,6 @@ function LoginAuthForm() {
                     >
                       <TextField
                         required
-                        id="outline-required"
                         label="Email"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
@@ -108,7 +108,6 @@ function LoginAuthForm() {
                     >
                       <TextField
                         required
-                        id="outline-required"
                         label="Password"
                         value={password}
                         type="password"

@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { register, signin } from "../User/AuthSlice";
+import { register } from "../User/AuthSlice";
 
 function AuthForm() {
   const navigate = useNavigate();
@@ -111,7 +111,6 @@ function AuthForm() {
                   >
                     <TextField
                       required
-                      id="outline-required"
                       label="Last Name"
                       value={lastName}
                       onChange={(event) => setLastName(event.target.value)}
@@ -125,7 +124,6 @@ function AuthForm() {
                   >
                     <TextField
                       required
-                      id="outline-required"
                       label="Email"
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
@@ -139,7 +137,6 @@ function AuthForm() {
                   >
                     <TextField
                       required
-                      id="outline-required"
                       label="Password"
                       value={password}
                       onChange={(event) => setPassword(event.target.value)}

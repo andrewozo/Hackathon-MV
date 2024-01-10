@@ -63,46 +63,61 @@ function Accounts() {
     <div>
       {isLoggedIn ? (
         <div>
-          {accounts.data?.map((account) => (
-            <div key={account.id}>
-              <ThemeProvider theme={theme}>
-                <Link to={`/accounts/${account.id}`}>
-                  <Box sx={{ width: "100%" }}>
-                    <Stack>
-                      <Paper style={{ margin: "10px" }}>
-                        <Item>
-                          <Typography
-                            color="#426375"
-                            sx={{ fontWeight: "bold" }}
-                            align="left"
-                            variant="h4"
-                          >
-                            {`${account.class} Account(${account.accountNum})`}
-                          </Typography>
+          {accounts.data?.length > 0 ? (
+            accounts.data?.map((account) => (
+              <div key={account.id}>
+                <ThemeProvider theme={theme}>
+                  <Link to={`/accounts/${account.id}`}>
+                    <Box sx={{ width: "100%" }}>
+                      <Stack>
+                        <Paper style={{ margin: "10px" }}>
+                          <Item>
+                            <Typography
+                              color="#426375"
+                              sx={{ fontWeight: "bold" }}
+                              align="left"
+                              variant="h4"
+                            >
+                              {`${account.class} Account(${account.accountNum})`}
+                            </Typography>
 
-                          <Typography
-                            sx={{ fontWeight: "bold" }}
-                            align="right"
-                            variant="h4"
-                          >
-                            ${account.balance}
-                          </Typography>
-                          <Typography
-                            sx={{ fontWeight: "bold" }}
-                            align="right"
-                            variant="h6"
-                          >
-                            Available Balance
-                          </Typography>
-                        </Item>
-                        <Divider />
-                      </Paper>
-                    </Stack>
-                  </Box>
-                </Link>
-              </ThemeProvider>
+                            <Typography
+                              sx={{ fontWeight: "bold" }}
+                              align="right"
+                              variant="h4"
+                            >
+                              ${account.balance}
+                            </Typography>
+                            <Typography
+                              sx={{ fontWeight: "bold" }}
+                              align="right"
+                              variant="h6"
+                            >
+                              Available Balance
+                            </Typography>
+                          </Item>
+                          <Divider />
+                        </Paper>
+                      </Stack>
+                    </Box>
+                  </Link>
+                </ThemeProvider>
+              </div>
+            ))
+          ) : (
+            <div>
+              <CssBaseline />
+              <Container component="main" className={classes.content}>
+                <AccountBalanceIcon fontSize="large" />
+
+                <Typography variant="h3" align="center" paragraph>
+                  Welcome to the Bank of Drew family! 🎉 {"We're "} excited to
+                  have you on board as our newest customer. Your next step is to
+                  open an account
+                </Typography>
+              </Container>
             </div>
-          ))}
+          )}
         </div>
       ) : (
         <div>
@@ -115,7 +130,8 @@ function Accounts() {
             <Typography variant="h3" align="center" paragraph>
               Hey there, future billionaire! 🚀 Welcome to the Bank of Drew,
               where we take banking as seriously as we take our morning coffee.
-              Forget about the snooze-fest of traditional banks; with us, it's
+              Forget about the snooze-fest of traditional banks; with us,
+              {"it's "}
               all about laughter, financial adventures, and making your money
               feel loved. Buckle up for a rollercoaster of financial fun – where
               banking meets a stand-up comedy show! 😄💸
