@@ -17,6 +17,7 @@ import AuthForm from "./Components/User/AuthForm";
 import LoginAuthForm from "./Components/User/LoginAuthForm";
 import { useSelector, useDispatch } from "react-redux";
 import { verifiedUser } from "./Components/User/AuthSlice";
+import SingleAccount from "./Components/Account/SingleAccount";
 
 function AppRoutes() {
   const isLoggedIn = useSelector((state) => state.auth.me.id);
@@ -33,6 +34,7 @@ function AppRoutes() {
           <Route path="/" element={<Accounts />} />
           <Route path="/signup" element={<AuthForm />} />
           <Route path="/login" element={<LoginAuthForm />} />
+          <Route path="/accounts/:id" element={<SingleAccount />} />
         </Routes>
       ) : (
         <Routes>

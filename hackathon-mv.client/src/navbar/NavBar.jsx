@@ -62,7 +62,7 @@ function NavBar() {
                   variant="h6"
                   component="div"
                   sx={{ flexGrow: 1 }}
-                  align="center"
+                  align="right"
                 >
                   <Link to="/">
                     Welcome, {firstName} {lastName}
@@ -74,7 +74,7 @@ function NavBar() {
                   variant="h6"
                   component="div"
                   sx={{ flexGrow: 1 }}
-                  align="center"
+                  align="right"
                 >
                   <Button
                     type="button"

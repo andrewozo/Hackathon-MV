@@ -1,7 +1,15 @@
 import React, { useEffect } from "react";
 import { fetchAllAccounts } from "./accountSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Typography, Divider, Box, Paper, Stack } from "@mui/material";
+import {
+  Typography,
+  Divider,
+  Box,
+  Paper,
+  Stack,
+  Card,
+  Grid,
+} from "@mui/material";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { verifiedUser } from "../User/AuthSlice";
@@ -51,17 +59,32 @@ function Accounts() {
           {accounts.data?.map((account) => (
             <div key={account.id}>
               <ThemeProvider theme={theme}>
-                <Link to={`/${account.id}`}>
+                <Link to={`/accounts/${account.id}`}>
                   <Box sx={{ width: "100%" }}>
-                    <Stack spacing={4}>
-                      <Paper elevation={6} style={{ margin: "10px" }}>
+                    <Stack>
+                      <Paper style={{ margin: "10px" }}>
                         <Item>
-                          <Typography sx={{ fontWeight: "bold" }}>
-                            {`${account.class}${account.accountNum}`}
+                          <Typography
+                            sx={{ fontWeight: "bold" }}
+                            align="left"
+                            variant="h4"
+                          >
+                            {`${account.class} Account(${account.accountNum})`}
                           </Typography>
 
-                          <Typography sx={{ fontWeight: "bold" }}>
-                            {account.putCardDown}
+                          <Typography
+                            sx={{ fontWeight: "bold" }}
+                            align="right"
+                            variant="h4"
+                          >
+                            ${account.balance}
+                          </Typography>
+                          <Typography
+                            sx={{ fontWeight: "bold" }}
+                            align="right"
+                            variant="h6"
+                          >
+                            Available Balance
                           </Typography>
                         </Item>
                         <Divider />

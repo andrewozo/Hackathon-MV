@@ -12,8 +12,8 @@ import {
 import { fetchSingleAccount } from "./accountSlice";
 
 function SingleAccount() {
-    const { id } = useParams();
-    const dispatch = useDispatch();
+  const { id } = useParams();
+  const dispatch = useDispatch();
   const account = useSelector((state) => state.accounts.singleAccount);
 
   const theme = createTheme({
@@ -27,14 +27,14 @@ function SingleAccount() {
     },
   });
 
-    useEffect(() => {
-      
+  useEffect(() => {
+    dispatch(fetchSingleAccount(id));
   });
 
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <Box sx={{ width: "100%", paddingTop: "75px", boxShadow: 8 }}>
+        <Box sx={{ width: "100%", boxShadow: 0 }}>
           <Paper
             style={{
               margin: "10px",
@@ -44,21 +44,21 @@ function SingleAccount() {
           >
             <Typography
               color="primary"
-              align="center"
+              align="left"
               sx={{ fontWeight: "bold" }}
               component="div"
               variant="h4"
             >
-              {account.name}
+              {account.class} Account({account.accountNum})
             </Typography>
             <Typography
               color="primary"
-              align="center"
+              align="right"
               sx={{ fontWeight: "bold" }}
               component="div"
               variant="h4"
             >
-              {account.balance}
+              ${account.balance}
             </Typography>
           </Paper>
         </Box>

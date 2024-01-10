@@ -27,7 +27,7 @@ namespace Hackathon_MV.Server.Controllers
             //int userId = int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)!.Value);
             return Ok(await _accountsService.GetAllAccounts(accId));
         }
-        
+        [EnableCors("AllowAll")]
         [HttpGet("{id}")]
         public async Task<ActionResult<ServiceResponse<GetAccountDto>>> GetSingleAccount(int id)
         {
